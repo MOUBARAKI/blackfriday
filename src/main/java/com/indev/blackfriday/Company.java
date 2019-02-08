@@ -22,15 +22,12 @@ public class Company {
         initStock();
     }
 
-
     public void stock(int quantity, String productName, int price) {
         if (productStock.get(getProductByName(productName)) == null)
             productStock.put(Product.createProductUsingPriceAndName(price, productName), quantity);
         else
             productStock.replace(getProductByName(productName), productStock.get(getProductByName(productName)), (productStock.get(getProductByName(productName)) + quantity));
-
     }
-
 
     public float sells(String productName) throws RuntimeException {
         float salePrice = (sellQuantity * getProductByName(productName).getPrice()) * (1 + gainPercentage);
@@ -49,13 +46,6 @@ public class Company {
         return null;
     }
 
-    public Company to(int i) {
-        return this;
-    }
-
-    public float computeBenefit() {
-        return 0;
-    }
 
     public int totalAssets() {
 
@@ -76,9 +66,8 @@ public class Company {
         return this;
     }
 
-
     public void initStock() {
-        productStock = new HashMap<Product, Integer>();
+        productStock = new HashMap<>();
     }
 
 
