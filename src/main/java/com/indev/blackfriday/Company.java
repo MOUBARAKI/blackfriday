@@ -5,13 +5,14 @@ import java.util.Map;
 
 public class Company {
     HashMap<Product, Integer> productStock;
-    int USUAL_SELL_QUANTITY = 5;
+    final int USUAL_SELL_QUANTITY = 5;
+    final int BLACK_FRIDAY_SELL_QUANTITY = 10;
+
     final float GAIN_PERCENTAGE = 0.2f;
     final float BLACK_FRIDAY_GAIN_PERCENTAGE = 0.1f;
 
     int sellQuantity = USUAL_SELL_QUANTITY;
     float gainPercentage=GAIN_PERCENTAGE;
-    final int BLACK_FRIDAY_SELL_QUANTITY = 10;
 
     int totalAssets = 0;
     int gain = 0;
