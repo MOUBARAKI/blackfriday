@@ -1,5 +1,6 @@
 package com.indev.blackfriday;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -21,6 +22,22 @@ public class BlackFridayTest {
         Company company = new Company();
         company.stock(10, "capsule", 2);
         assertThat(company.totalAssets(), is(20));
+    }
+    @Test
+    public void sellsWithProxy() {
+        Company company = new Company();
+        company.stock(10, "capsule", 2);
+        float salePrice = company.sells("capsule");
+        assertThat(salePrice, is(12f));
+
+        assertThat(company.salesHistory(), CoreMatchers.equalTo("5:capsules"));
+
+        salePrice = company.sells("capsule");
+        assertThat(salePrice, is(12f));
+
+        assertThat(company.salesHistory(), CoreMatchers.equalTo("10:capsules"));
+
+        assertThat(company.totalAssets(), is(24));
     }
 
     @Test

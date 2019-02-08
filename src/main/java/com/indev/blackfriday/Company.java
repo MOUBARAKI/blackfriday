@@ -7,16 +7,14 @@ public class Company {
     HashMap<Product, Integer> productStock;
     final int USUAL_SELL_QUANTITY = 5;
     final int BLACK_FRIDAY_SELL_QUANTITY = 10;
-
     final float GAIN_PERCENTAGE = 0.2f;
     final float BLACK_FRIDAY_GAIN_PERCENTAGE = 0.1f;
-
     int sellQuantity = USUAL_SELL_QUANTITY;
     float gainPercentage=GAIN_PERCENTAGE;
-
     int totalAssets = 0;
     int gain = 0;
-
+    HashMap<Product,Integer> salesHistory= new HashMap<>() ;
+    SalesHistoryProxy salesHistoryProxy ;
 
     public Company() {
         initStock();
@@ -35,7 +33,7 @@ public class Company {
             throw new RuntimeException("Stock Insufisant");
         productStock.replace(getProductByName(productName), productStock.get(getProductByName(productName)), (productStock.get(getProductByName(productName)) - sellQuantity));
         gain += salePrice;
-
+        addToSalesHistory(getProductByName(productName));
         return salePrice;
     }
 
@@ -46,7 +44,6 @@ public class Company {
         return null;
     }
 
-
     public int totalAssets() {
 
         totalAssets = 0;
@@ -55,7 +52,6 @@ public class Company {
 
         }
         totalAssets += gain;
-
 
         return totalAssets;
     }
@@ -70,5 +66,12 @@ public class Company {
         productStock = new HashMap<>();
     }
 
-
+    public String salesHistory() {
+        return new SalesHistoryProxy(salesHistory).salesHistory();
+    }
+    public void addToSalesHistory(Product product){
+        if (salesHistory.get(product) == null){
+        salesHistory.put(product,sellQuantity);}
+        else salesHistory.replace(product,salesHistory.get(product),salesHistory.get(product)+ sellQuantity);
+    }
 }
